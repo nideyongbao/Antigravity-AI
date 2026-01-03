@@ -1,0 +1,175 @@
+{
+    "mcpServers": {
+        "tavily": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "tavily-mcp"
+            ],
+            "env": {
+                "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+            }
+        },
+        "rednote-MCP": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "rednote-mcp",
+                "--stdio"
+            ]
+        },
+        "fabric-mcp-server": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "fabric-mcp-server"
+            ],
+            "env": {},
+            "transportType": "stdio",
+            "timeout": 60
+        },
+        "github": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ],
+            "env": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+            }
+        },
+        "puppeteer": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-puppeteer"
+            ],
+            "env": {}
+        },
+        "xiaohongshu-mcp": {
+            "serverUrl": "http://localhost:18060/mcp"
+        }
+    },
+    "antigravity": {
+        "version": "1.0.0",
+        "description": "Antigravity AI Development Team MCP Configuration",
+        "roleAuthorization": {
+            "project_lead": {
+                "allowed": [
+                    "github",
+                    "fabric-mcp-server"
+                ],
+                "tools": {
+                    "github": [
+                        "list_issues",
+                        "get_issue",
+                        "create_issue",
+                        "search_code"
+                    ],
+                    "fabric-mcp-server": [
+                        "recommend_tool"
+                    ]
+                }
+            },
+            "product_manager": {
+                "allowed": [
+                    "rednote-MCP",
+                    "fabric-mcp-server",
+                    "tavily"
+                ],
+                "tools": {
+                    "rednote-MCP": [
+                        "search_notes",
+                        "get_note_content",
+                        "get_note_comments"
+                    ],
+                    "fabric-mcp-server": [
+                        "recommend_tool"
+                    ],
+                    "tavily": [
+                        "search",
+                        "extract"
+                    ]
+                }
+            },
+            "architect": {
+                "allowed": [
+                    "github",
+                    "fabric-mcp-server",
+                    "tavily"
+                ],
+                "tools": {
+                    "github": [
+                        "get_file_contents",
+                        "search_code",
+                        "list_commits"
+                    ],
+                    "fabric-mcp-server": [
+                        "recommend_tool"
+                    ],
+                    "tavily": [
+                        "search"
+                    ]
+                }
+            },
+            "developer": {
+                "allowed": [
+                    "github",
+                    "fabric-mcp-server"
+                ],
+                "tools": {
+                    "github": [
+                        "get_file_contents",
+                        "push_files",
+                        "create_pull_request",
+                        "create_branch"
+                    ],
+                    "fabric-mcp-server": [
+                        "recommend_tool"
+                    ]
+                }
+            },
+            "qa_engineer": {
+                "allowed": [
+                    "puppeteer",
+                    "fabric-mcp-server"
+                ],
+                "tools": {
+                    "puppeteer": [
+                        "puppeteer_navigate",
+                        "puppeteer_screenshot",
+                        "puppeteer_click",
+                        "puppeteer_fill",
+                        "puppeteer_evaluate"
+                    ],
+                    "fabric-mcp-server": [
+                        "recommend_tool"
+                    ]
+                }
+            }
+        },
+        "securityControls": {
+            "requireApproval": [
+                "github.push_files",
+                "github.create_pull_request",
+                "github.create_issue",
+                "github.create_branch"
+            ],
+            "autoApprove": [
+                "github.get_file_contents",
+                "github.search_code",
+                "github.list_issues",
+                "puppeteer.puppeteer_screenshot",
+                "rednote-MCP.search_notes",
+                "tavily.search",
+                "fabric-mcp-server.recommend_tool"
+            ]
+        },
+        "dynamicDiscovery": {
+            "enabled": true,
+            "handshakeOnly": true,
+            "onDemandSchema": true,
+            "toolSearchEnabled": true
+        }
+    }
+}
