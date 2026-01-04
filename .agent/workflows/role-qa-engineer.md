@@ -1,7 +1,7 @@
 ---
 description: 测试工程师工作流 - 测试策略、E2E测试与返工触发
 role: qa_engineer
-mcp_tools: [puppeteer, fabric-mcp-server]
+mcp_tools: [puppeteer, memory]
 ---
 
 # QA Engineer / 测试工程师
@@ -75,6 +75,7 @@ test_plan:
 
 | 技能 | 工作流文件 | 说明 |
 |------|-----------|------|
+| 构建验证 | `skill-qa-build-verify.md` | 执行真实构建验证 |
 | 测试策略 | `skill-qa-test-strategy.md` | 基于 PRD 生成测试用例 |
 | E2E 测试 | `skill-qa-e2e-test.md` | Puppeteer 自动化测试 |
 | 缺陷报告 | `skill-qa-defect-report.md` | 测试失败时生成报告并触发返工 |
@@ -86,7 +87,17 @@ test_plan:
 states:
   RECEIVE_CODE:
     actions: ["read_code_diffs", "load_acceptance_criteria"]
-    next: PLAN_TESTS
+    next: BUILD_VERIFICATION
+    
+  BUILD_VERIFICATION:
+    actions: ["detect_project_type", "run_build_commands"]
+    skill: "/skill-qa-build-verify"
+    next_on_pass: PLAN_TESTS
+    next_on_fail: REPORT_BUILD_FAILURE
+    
+  REPORT_BUILD_FAILURE:
+    actions: ["create_build_error_report", "trigger_rework"]
+    next: WAIT_FOR_FIX
     
   PLAN_TESTS:
     actions: ["generate_test_strategy", "create_test_cases"]

@@ -10,24 +10,6 @@
                 "TAVILY_API_KEY": "${TAVILY_API_KEY}"
             }
         },
-        "rednote-MCP": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "rednote-mcp",
-                "--stdio"
-            ]
-        },
-        "fabric-mcp-server": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "fabric-mcp-server"
-            ],
-            "env": {},
-            "transportType": "stdio",
-            "timeout": 60
-        },
         "github": {
             "command": "npx",
             "args": [
@@ -46,8 +28,22 @@
             ],
             "env": {}
         },
-        "xiaohongshu-mcp": {
-            "serverUrl": "http://localhost:18060/mcp"
+        "filesystem": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                "${PROJECT_ROOT}/.antigravity-output"
+            ],
+            "env": {}
+        },
+        "memory": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-memory"
+            ],
+            "env": {}
         }
     },
     "antigravity": {
@@ -57,7 +53,7 @@
             "project_lead": {
                 "allowed": [
                     "github",
-                    "fabric-mcp-server"
+                    "memory"
                 ],
                 "tools": {
                     "github": [
@@ -66,26 +62,18 @@
                         "create_issue",
                         "search_code"
                     ],
-                    "fabric-mcp-server": [
-                        "recommend_tool"
+                    "memory": [
+                        "create_entities",
+                        "search_nodes",
+                        "read_graph"
                     ]
                 }
             },
             "product_manager": {
                 "allowed": [
-                    "rednote-MCP",
-                    "fabric-mcp-server",
                     "tavily"
                 ],
                 "tools": {
-                    "rednote-MCP": [
-                        "search_notes",
-                        "get_note_content",
-                        "get_note_comments"
-                    ],
-                    "fabric-mcp-server": [
-                        "recommend_tool"
-                    ],
                     "tavily": [
                         "search",
                         "extract"
@@ -95,7 +83,6 @@
             "architect": {
                 "allowed": [
                     "github",
-                    "fabric-mcp-server",
                     "tavily"
                 ],
                 "tools": {
@@ -104,9 +91,6 @@
                         "search_code",
                         "list_commits"
                     ],
-                    "fabric-mcp-server": [
-                        "recommend_tool"
-                    ],
                     "tavily": [
                         "search"
                     ]
@@ -114,8 +98,7 @@
             },
             "developer": {
                 "allowed": [
-                    "github",
-                    "fabric-mcp-server"
+                    "github"
                 ],
                 "tools": {
                     "github": [
@@ -123,16 +106,13 @@
                         "push_files",
                         "create_pull_request",
                         "create_branch"
-                    ],
-                    "fabric-mcp-server": [
-                        "recommend_tool"
                     ]
                 }
             },
             "qa_engineer": {
                 "allowed": [
                     "puppeteer",
-                    "fabric-mcp-server"
+                    "memory"
                 ],
                 "tools": {
                     "puppeteer": [
@@ -142,8 +122,31 @@
                         "puppeteer_fill",
                         "puppeteer_evaluate"
                     ],
-                    "fabric-mcp-server": [
-                        "recommend_tool"
+                    "memory": [
+                        "create_entities",
+                        "search_nodes",
+                        "read_graph"
+                    ]
+                }
+            },
+            "orchestrator": {
+                "allowed": [
+                    "filesystem",
+                    "memory"
+                ],
+                "tools": {
+                    "filesystem": [
+                        "read_file",
+                        "write_file",
+                        "create_directory",
+                        "list_directory"
+                    ],
+                    "memory": [
+                        "create_entities",
+                        "create_relations",
+                        "search_nodes",
+                        "read_graph",
+                        "delete_entities"
                     ]
                 }
             }
@@ -160,9 +163,9 @@
                 "github.search_code",
                 "github.list_issues",
                 "puppeteer.puppeteer_screenshot",
-                "rednote-MCP.search_notes",
                 "tavily.search",
-                "fabric-mcp-server.recommend_tool"
+                "memory.search_nodes",
+                "filesystem.read_file"
             ]
         },
         "dynamicDiscovery": {

@@ -175,6 +175,17 @@ decide:
     ═══════════════════════════════════════════════════════════
   
   output: "Implementation Plan / Task List"
+
+  thought_output_requirement: |
+    在 DECIDE 阶段，**必须** 使用 <thought> 块输出推理过程：
+    
+    <thought>
+    - 当前状态分析：{current_state}
+    - 可选方案：A / B / C
+    - 选择方案 {chosen} 的原因：{reason}
+    - 潜在风险：{risks}
+    - 缓解策略：{mitigation}
+    </thought>
 ```
 
 ### 4. Act (行动)

@@ -1,7 +1,7 @@
 ---
 description: 系统架构师工作流 - 技术选型、API设计与实施计划
 role: architect
-mcp_tools: [github, fabric-mcp-server]
+mcp_tools: [github, tavily]
 ---
 
 # System Architect / 系统架构师

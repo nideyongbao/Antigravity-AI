@@ -7,25 +7,8 @@
                 "tavily-mcp"
             ],
             "env": {
-                "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+                "TAVILY_API_KEY": "tvly-dev-x"
             }
-        },
-        "rednote-MCP": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "rednote-mcp",
-                "--stdio"
-            ]
-        },
-        "fabric-mcp-server": {
-            "command": "node",
-            "args": [
-                "E:\\code\\workspace\\1225\\fabric-mcp-server\\build\\index.js"
-            ],
-            "env": {},
-            "transportType": "stdio",
-            "timeout": 60
         },
         "github": {
             "command": "npx",
@@ -34,7 +17,7 @@
                 "@modelcontextprotocol/server-github"
             ],
             "env": {
-                "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "x"
             }
         },
         "puppeteer": {
@@ -45,83 +28,22 @@
             ],
             "env": {}
         },
-        "playwright": {
+        "filesystem": {
             "command": "npx",
             "args": [
                 "-y",
-                "@anthropic/mcp-server-playwright"
+                "@modelcontextprotocol/server-filesystem",
+                "./.antigravity-output"
             ],
             "env": {}
         },
-        "mermaid": {
+        "memory": {
             "command": "npx",
             "args": [
                 "-y",
-                "@narasimhaponnada/mermaid-mcp-server"
+                "@modelcontextprotocol/server-memory"
             ],
             "env": {}
-        },
-        "notion": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@anthropic/mcp-server-notion"
-            ],
-            "env": {
-                "NOTION_TOKEN": ""
-            }
-        },
-        "figma": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "figma-mcp-server"
-            ],
-            "env": {
-                "FIGMA_ACCESS_TOKEN": ""
-            }
-        },
-        "sonarqube": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "sonarqube-mcp-server"
-            ],
-            "env": {
-                "SONAR_HOST_URL": "${SONAR_HOST_URL}",
-                "SONAR_TOKEN": "${SONAR_TOKEN}"
-            }
-        },
-        "snyk": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@snyk/mcp-server"
-            ],
-            "env": {
-                "SNYK_TOKEN": "${SNYK_TOKEN}"
-            }
-        },
-        "lighthouse": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "lighthouse-mcp-server"
-            ],
-            "env": {}
-        },
-        "slack": {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-slack"
-            ],
-            "env": {
-                "SLACK_BOT_TOKEN": ","SLACK_TEAM_ID": ""
-            }
-        },
-        "xiaohongshu-mcp": {
-            "serverUrl": "http://localhost:18060/mcp"
         }
     }
 }

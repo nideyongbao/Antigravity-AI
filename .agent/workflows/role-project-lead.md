@@ -1,7 +1,7 @@
 ---
 description: 项目主管工作流 - 任务接收、拆解与进度仲裁
 role: project_lead
-mcp_tools: [github, fabric-mcp-server]
+mcp_tools: [github, memory]
 ---
 
 # Project Lead / 项目主管

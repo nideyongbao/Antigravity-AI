@@ -155,6 +155,31 @@ express_mode:
 
 ---
 
+## 可信目录白名单 (Trusted Directories)
+
+> [!NOTE]
+> 以下目录中的文件操作将**自动执行**，无需用户确认：
+
+```yaml
+trusted_directories:
+  auto_create:
+    # 输出目录可自动创建，无需用户确认
+    - "{project_root}/.antigravity-output/**"
+    
+  require_approval:
+    # 以下目录的修改需要用户确认
+    - "{project_root}/src/**"
+    - "{project_root}/config/**"
+    - "{project_root}/package.json"
+    - "{project_root}/docker-compose.yml"
+```
+
+**适用规则**:
+- `write_to_file` 操作在 `auto_create` 目录中时，设置 `SafeToAutoRun: true`
+- 其他目录遵循标准安全检查流程
+
+---
+
 ## 输出目录结构 (Output Directory)
 
 所有制品 **MUST** 存放在统一的输出目录：

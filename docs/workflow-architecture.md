@@ -89,7 +89,7 @@ Antigravity AI 开发团队是一个基于 **VOODA 认知循环 + SOP 状态机 
 
 ---
 
-## 技能工作流 (15 个)
+## 技能工作流 (16 个)
 
 ### 项目主管技能 (2)
 | 技能 | 文件 | 说明 |
@@ -119,9 +119,10 @@ Antigravity AI 开发团队是一个基于 **VOODA 认知循环 + SOP 状态机 
 | 自我修复 | `skill-dev-self-repair.md` | 错误修复 |
 | 缺陷修复 | `skill-dev-bug-fix.md` | 响应返工 |
 
-### 测试工程师技能 (4)
+### 测试工程师技能 (5)
 | 技能 | 文件 | 说明 |
 |------|------|------|
+| 构建验证 | `skill-qa-build-verify.md` | 真实构建验证 |
 | 测试策略 | `skill-qa-test-strategy.md` | 用例设计 |
 | E2E 测试 | `skill-qa-e2e-test.md` | Puppeteer |
 | 缺陷报告 | `skill-qa-defect-report.md` | 触发返工 |
@@ -218,19 +219,6 @@ stateDiagram-v2
     note right of DELIVERY: Walkthrough.md
 ```
 
----
-
-## MCP 工具矩阵
-
-| 角色 | github | puppeteer | rednote | fabric | tavily |
-|------|:------:|:---------:|:-------:|:------:|:------:|
-| 项目主管 | ✅ | ❌ | ❌ | ✅ | ❌ |
-| 产品经理 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| 架构师 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| 开发工程师 | ✅ | ❌ | ❌ | ✅ | ❌ |
-| 测试工程师 | ❌ | ✅ | ❌ | ✅ | ❌ |
-
----
 
 ## 制品目录结构
 
@@ -293,9 +281,10 @@ stateDiagram-v2
 ├── skill-dev-self-repair.md
 ├── skill-dev-bug-fix.md
 ├── skill-qa-test-strategy.md
+├── skill-qa-build-verify.md     # 真实构建验证
 ├── skill-qa-e2e-test.md
 ├── skill-qa-defect-report.md
 └── skill-qa-walkthrough.md
 ```
 
-**共计: 27 个工作流文件**
+**共计: 28 个工作流文件**

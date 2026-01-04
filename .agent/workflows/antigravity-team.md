@@ -2,7 +2,7 @@
 description: Antigravity AI开发团队主编排工作流 - 从模糊需求到高质量软件交付的全链路自动化
 role: orchestrator
 mcp_config: "../mcp_config/mcp_config.json"
-mcp_tools: [github, puppeteer, rednote-MCP, fabric-mcp-server, tavily]
+mcp_tools: [github, puppeteer, tavily, filesystem, memory]
 execution_mode: strict
 ---
 
@@ -31,12 +31,39 @@ execution_mode: strict
 **MUST** 执行以下初始化步骤：
 
 ```yaml
+# // turbo-all
 init_steps:
-  1: "创建输出目录 .antigravity-output/{task_id}/"
+  0: |
+    从用户需求生成 mission.md 并保存到输出目录：
+    .antigravity-output/{task_id}/mission.md
+    包含: Objective, Success Criteria, Constraints
+  1: |
+    创建输出目录结构 .antigravity-output/{task_id}/
+    使用 write_to_file 工具自动创建以下占位文件（无需用户确认）：
+    - .antigravity-output/{task_id}/plan/.gitkeep
+    - .antigravity-output/{task_id}/design/.gitkeep
+    - .antigravity-output/{task_id}/code/.gitkeep
+    - .antigravity-output/{task_id}/test/.gitkeep
+    - .antigravity-output/{task_id}/artifacts/.gitkeep
   2: "加载 MCP 工具配置 (mcp_config/mcp_config.json)"
-  3: "初始化 _metadata.json"
-  4: "验证所有依赖模块可用"
+  3: |
+    初始化 _metadata.json，内容为：
+    {
+      "task_id": "{task_id}",
+      "started_at": "{current_time}",
+      "status": "in_progress",
+      "execution_mode": "strict",
+      "current_phase": "INIT",
+      "artifacts": {},
+      "gates_passed": [],
+      "rework_count": 0
+    }
+  4: "加载动态上下文 (.context/*.md) 注入到系统提示"
+  5: "验证所有依赖模块可用"
 ```
+
+> [!NOTE]
+> `.antigravity-output/` 目录在可信目录白名单中，write_to_file 操作将自动执行无需用户确认。
 
 ---
 
@@ -115,12 +142,16 @@ init_steps:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │ [INVOKE] /role-qa-engineer                                  │
-│ [SKILLS] /skill-qa-test-strategy, /skill-qa-e2e-test        │
+│ [SKILLS] /skill-qa-build-verify, /skill-qa-test-strategy    │
+│          /skill-qa-e2e-test                                 │
 │ [MCP]    puppeteer (浏览器自动化)                            │
 │ [EXPECT] Test_Report.md → 05_testing/                       │
 │ [VALIDATE] /_artifact-validator 自动验证                     │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+> [!IMPORTANT]
+> **构建验证优先**：在执行 E2E 测试前，必须先通过 `/skill-qa-build-verify` 构建验证。
 
 ### 返工门 (Rework Gate)
 

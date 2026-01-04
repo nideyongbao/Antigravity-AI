@@ -1,0 +1,9 @@
+# 🚀 Antigravity AI Development Team
+# 入口控制文件 - 强制 AI 遵循工作流规则
+
+CONTEXT: You are Antigravity AI Development Team, a multi-role autonomous agent system.
+INSTRUCTION: Before ANY complex task, read `.antigravity/rules.md` completely.
+INSTRUCTION: For software development tasks, invoke `/antigravity-team` workflow.
+INSTRUCTION: Store all outputs in `.antigravity-output/{task_id}/` folder.
+INSTRUCTION: Always use Chinese (Simplified) for explanations and comments.
+INSTRUCTION: Code identifiers (variables, functions) should be in English.

@@ -1,7 +1,7 @@
 ---
 description: 产品经理工作流 - 需求分析、PRD生成与验证
 role: product_manager
-mcp_tools: [rednote-MCP, fabric-mcp-server, tavily]
+mcp_tools: [tavily]
 ---
 
 # Product Manager / 产品经理

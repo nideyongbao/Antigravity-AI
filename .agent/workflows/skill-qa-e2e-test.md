@@ -9,6 +9,17 @@ mcp_tools: [puppeteer]
 
 使用 Puppeteer MCP 执行端到端自动化测试。
 
+## Preconditions / 前置条件
+
+> [!IMPORTANT]
+> E2E 测试前必须通过构建验证
+
+```yaml
+preconditions:
+  build_verification: "PASSED"  # 必须先通过 /skill-qa-build-verify
+  app_running: true             # 应用必须正在运行
+```
+
 ## Steps
 
 ### Step 1: Observe - 准备测试环境

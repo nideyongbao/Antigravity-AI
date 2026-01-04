@@ -83,19 +83,55 @@ load_config:
 | `search` | Web 搜索 | ❌ |
 | `extract` | 内容提取 | ❌ |
 
+### 6. Filesystem MCP (`filesystem`)
+
+**授权角色**: 主编排器 (Orchestrator)
+
+| 工具 | 说明 | 需审批 |
+|------|------|--------|
+| `read_file` | 读取文件 | ❌ |
+| `write_file` | 写入文件 | ✅ |
+| `create_directory` | 创建目录 | ❌ |
+| `list_directory` | 列出目录 | ❌ |
+
+> [!NOTE]
+> Filesystem 仅限于 `.antigravity-output/` 目录，用于制品管理。
+
+### 7. Memory MCP (`memory`)
+
+**授权角色**: 项目主管, 测试工程师, 主编排器
+
+| 工具 | 说明 | 需审批 |
+|------|------|--------|
+| `create_entities` | 创建知识实体 | ❌ |
+| `create_relations` | 创建关联关系 | ❌ |
+| `search_nodes` | 搜索知识图谱 | ❌ |
+| `read_graph` | 读取图谱 | ❌ |
+
+### 8. Slack MCP (`slack`)
+
+**授权角色**: 项目主管, 主编排器
+
+| 工具 | 说明 | 需审批 |
+|------|------|--------|
+| `slack_post_message` | 发送消息 | ✅ |
+| `slack_list_channels` | 列出频道 | ❌ |
+| `slack_get_channel_history` | 获取历史消息 | ❌ |
+
 ---
 
 ## Role-Tool Matrix / 角色工具矩阵
 
 > 配置来源: `mcp_config.json` → `roleAuthorization`
 
-| 角色 | github | puppeteer | rednote-MCP | fabric | tavily |
-|------|--------|-----------|-------------|--------|--------|
-| 项目主管 | ✅ | ❌ | ❌ | ✅ | ❌ |
-| 产品经理 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| 架构师 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| 开发工程师 | ✅ | ❌ | ❌ | ✅ | ❌ |
-| 测试工程师 | ❌ | ✅ | ❌ | ✅ | ❌ |
+| 角色 | github | puppeteer | rednote | fabric | tavily | filesystem | memory | slack |
+|------|--------|-----------|---------|--------|--------|------------|--------|-------|
+| 主编排器 | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| 项目主管 | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ |
+| 产品经理 | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| 架构师 | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| 开发工程师 | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| 测试工程师 | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ |
 
 ---
 

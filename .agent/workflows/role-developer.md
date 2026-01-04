@@ -1,7 +1,7 @@
 ---
 description: 开发工程师工作流 - 代码实现、TDD与自我修复
 role: developer
-mcp_tools: [github, fabric-mcp-server]
+mcp_tools: [github]
 ---
 
 # Developer / 开发工程师
