@@ -1,0 +1,24 @@
+{
+    "task_id": "hello-world-20260104",
+    "title": "Hello World HTML Page",
+    "complexity": 1,
+    "mode": "express",
+    "tasks": [
+        {
+            "id": "T1",
+            "title": "创建 HTML 页面",
+            "description": "创建显示 'Hello, Antigravity!' 的 HTML 页面",
+            "status": "pending",
+            "assignee": "developer",
+            "priority": "high"
+        },
+        {
+            "id": "T2",
+            "title": "验证页面显示",
+            "description": "在浏览器中打开页面验证显示正确",
+            "status": "pending",
+            "assignee": "qa",
+            "priority": "high"
+        }
+    ]
+}
