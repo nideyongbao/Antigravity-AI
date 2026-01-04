@@ -44,6 +44,15 @@
                 "@modelcontextprotocol/server-memory"
             ],
             "env": {}
+        },
+        "git": {
+            "command": "uvx",
+            "args": [
+                "mcp-server-git",
+                "--repository",
+                "${PROJECT_ROOT}"
+            ],
+            "env": {}
         }
     },
     "antigravity": {
@@ -98,7 +107,8 @@
             },
             "developer": {
                 "allowed": [
-                    "github"
+                    "github",
+                    "git"
                 ],
                 "tools": {
                     "github": [
@@ -106,6 +116,13 @@
                         "push_files",
                         "create_pull_request",
                         "create_branch"
+                    ],
+                    "git": [
+                        "git_status",
+                        "git_add",
+                        "git_commit",
+                        "git_diff",
+                        "git_log"
                     ]
                 }
             },
