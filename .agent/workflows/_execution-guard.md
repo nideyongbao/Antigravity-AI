@@ -279,3 +279,92 @@ on_any_error:
 
 > [!IMPORTANT]
 > 本守卫模块由 `antigravity-team.md` 强制加载，任何角色工作流启动前都会检查是否遵守这些规则。
+
+---
+
+## Rule 7: 上下文管理 (Context Management)
+
+> [!CAUTION]
+> **每个阶段结束时 MUST 更新以下状态，以支持断点续传和跨阶段记忆。**
+
+```yaml
+context_management:
+  after_each_phase:
+    - action: "更新 _metadata.json"
+      content: |
+        {
+          "current_phase": "{phase_name}",
+          "last_action": "{action_description}",
+          "key_decisions": ["{decision_1}", "{decision_2}"],
+          "pending_issues": ["{issue_1}"]
+        }
+        
+    - action: "记录关键决策到 memory MCP (如可用)"
+      mcp_call: |
+        memory_store({
+          "key": "{task_id}_{phase}",
+          "value": "{phase_summary}",
+          "metadata": {"type": "phase_summary"}
+        })
+
+  on_error:
+    - action: "保存错误上下文"
+      content: |
+        {
+          "error_type": "{error_type}",
+          "error_message": "{message}",
+          "attempted_fixes": ["{fix_1}", "{fix_2}"],
+          "files_modified": ["{file_1}", "{file_2}"]
+        }
+        
+    - action: "记录到 _metadata.json error_log"
+      
+  on_resume:
+    - action: "读取 _metadata.json 恢复状态"
+    - action: "查询 memory MCP 获取历史决策"
+    - action: "验证已完成阶段的产物完整性"
+```
+
+### 跨阶段信息传递
+
+```yaml
+inter_phase_data:
+  from_requirement_to_design:
+    - "PRD.md 中的功能列表"
+    - "用户故事验收标准"
+    
+  from_design_to_implementation:
+    - "Implementation_Plan.md 的文件列表"
+    - "技术栈决策"
+    - "目录结构"
+    
+  from_implementation_to_testing:
+    - "已实现功能清单"
+    - "已知限制"
+    - "验证命令"
+```
+
+---
+
+## Rule 8: 阶段间总结 (Phase Summary Report)
+
+每个主要阶段结束时 **MUST** 生成简短总结供下一阶段参考:
+
+```markdown
+## Phase Summary: {PHASE_NAME}
+
+### 完成的工作
+- {item_1}
+- {item_2}
+
+### 关键决策
+- {decision_1}: {rationale}
+
+### 下一阶段需要的信息
+- {info_1}
+- {info_2}
+
+### 已知问题/风险
+- {issue_1}
+```
+

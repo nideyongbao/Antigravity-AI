@@ -97,6 +97,19 @@ init_steps:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+> [!IMPORTANT]
+> **MCP 强制调用 (MANDATORY)**
+
+```yaml
+mandatory_mcp_calls:
+  tavily-search:
+    - query: "{项目类型} 竞品分析 UI 设计 best practices"
+      purpose: "竞品调研与设计参考"
+      
+    - query: "{核心技术栈} project template example"
+      purpose: "技术可行性验证"
+```
+
 > [!WARNING]
 > **[GATE] PRD_APPROVAL** - MUST 调用 notify_user 请求用户批准 PRD
 
@@ -127,6 +140,7 @@ init_steps:
 ┌─────────────────────────────────────────────────────────────┐
 │ [INVOKE] /role-developer                                    │
 │ [SKILLS] /skill-dev-task-breakdown                          │
+│          /skill-dev-incremental-coding (NEW)                │
 │          /skill-dev-tdd-coding                              │
 │          /skill-dev-self-repair                             │
 │ [MCP]    github (代码操作)                                   │
@@ -134,6 +148,40 @@ init_steps:
 │ [RECOVERY] 编译失败自动触发 /_error-recovery                  │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+> [!IMPORTANT]
+> **增量验证检查点 (MANDATORY)**
+
+```yaml
+incremental_checkpoints:
+  1_project_init:
+    after: "创建 package.json, tsconfig.json 等配置文件"
+    verify: "npm install && npm run build 成功"
+    block_on_fail: true
+    
+  2_shell_app:
+    after: "创建主进程和渲染进程入口"
+    verify: "npm run preview 打开空白窗口 (Electron 应用)"
+    block_on_fail: true
+    
+  3_ui_components:
+    after: "创建核心 UI 组件"
+    verify: "npm run dev 组件渲染正确"
+    block_on_fail: false
+    
+  4_core_features:
+    after: "实现核心功能"
+    verify: "功能测试通过"
+    block_on_fail: true
+    
+  5_pre_dist:
+    after: "完成所有开发"
+    verify: "npm run preview 完整功能可用"
+    block_on_fail: true
+```
+
+> [!CAUTION]
+> **禁止一次性写完所有代码后再验证！每个检查点必须通过才能继续。**
 
 ---
 
